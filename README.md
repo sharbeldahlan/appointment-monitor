@@ -22,6 +22,11 @@ Every 10 mins, do appointment monitoring (main task):
 - Search for available appointments based on the attributes of each monitor.
 - Email with the availability.
 
+## Development Methodologies
+- Agile: Kanban. Check out the
+  [project's kanban board](https://github.com/sharbeldahlan/appointment-monitor/projects/1).
+- Documentation-driven development (DDD, for the love of acronyms).
+- Test-driven Development (TDD).
 
 ## Advantages
 In addition to the main advantage of not having to manually do the search:
