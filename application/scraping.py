@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from application.constants import CATEGORY_FIELD_XPATH
+from application.constants import CATEGORY_TEXT_MAPPING
 from application.constants import DISPLAYED_WEEKS
 from application.constants import DRIVER_PATH
 from application.constants import ENGLISH_LANGUAGE_CHOICE_TEXT
@@ -15,12 +16,11 @@ from application.constants import NEXT_WEEK_BUTTON_CLASS_NAME
 from application.constants import OFFICE_FIELD_XPATH
 from application.constants import SEARCH_BUTTON_XPATH
 from application.constants import SERVICE_FIELD_XPATH
+from application.constants import SERVICE_TEXT_MAPPING
 from application.constants import WEBLINK
 
 
-def scrape_booking_site(category_choice_text: str,
-                        service_choice_text: str,
-                        office_choice_text: str) -> Optional[Dict[str, str]]:
+def scrape_booking_site(service_choice: str, office_choice: str) -> Optional[Dict[str, str]]:
     """
     Main scraping function that:
         - creates a driver,
@@ -37,9 +37,8 @@ def scrape_booking_site(category_choice_text: str,
 
     driver = enter_search_parameters(
         driver=driver,
-        category_choice_text=category_choice_text,
-        service_choice_text=service_choice_text,
-        office_choice_text=office_choice_text
+        service_choice=service_choice,
+        office_choice=office_choice
     )
     result_dict = scrape_through_search_results(driver)
 
@@ -48,16 +47,17 @@ def scrape_booking_site(category_choice_text: str,
     return result_dict
 
 
-def enter_search_parameters(driver: WebDriver,
-                            category_choice_text: str,
-                            service_choice_text: str,
-                            office_choice_text: str) -> WebDriver:
+def enter_search_parameters(driver: WebDriver, service_choice: str, office_choice: str) -> WebDriver:
     """
     On the booking page, the search involves three choice fields:
         - Category: e.g. "Citizenship", "Residence Permit", etc.
         - Service: e.g. services of "Residence Permit" category are "Work", "Permanent Residence Permit", etc.
         - Office: e.g. "Lahti", "Oulu", "Lappeenranta", etc.
     """
+    # Extract the textual representation of the choice parameters from the passed choices
+    category_choice_text = CATEGORY_TEXT_MAPPING[service_choice]
+    service_choice_text = SERVICE_TEXT_MAPPING[service_choice]
+
     # Change the language to English
     language_field = driver.find_element_by_xpath(LANGUAGE_FIELD_XPATH)
     language_field.click()
@@ -87,7 +87,7 @@ def enter_search_parameters(driver: WebDriver,
     office_field = driver.find_element_by_xpath(OFFICE_FIELD_XPATH)
     office_field.click()
     time.sleep(1)
-    office_option = driver.find_element_by_partial_link_text(office_choice_text)
+    office_option = driver.find_element_by_partial_link_text(office_choice)
     office_option.click()
     time.sleep(1)
 
