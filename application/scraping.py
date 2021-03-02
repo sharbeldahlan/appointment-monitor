@@ -6,9 +6,12 @@ from selenium import webdriver
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from application.constants import CATEGORY_FIELD_XPATH
+from application.constants import DISPLAYED_WEEKS
 from application.constants import DRIVER_PATH
 from application.constants import ENGLISH_LANGUAGE_CHOICE_TEXT
+from application.constants import INDEXES_FOR_DAYS_OF_THE_WEEK_DIV
 from application.constants import LANGUAGE_FIELD_XPATH
+from application.constants import NEXT_WEEK_BUTTON_CLASS_NAME
 from application.constants import OFFICE_FIELD_XPATH
 from application.constants import SEARCH_BUTTON_XPATH
 from application.constants import SERVICE_FIELD_XPATH
@@ -38,7 +41,6 @@ def scrape_booking_site(category_choice_text: str,
         service_choice_text=service_choice_text,
         office_choice_text=office_choice_text
     )
-    # For now, this returns a hardcoded result:
     result_dict = scrape_through_search_results(driver)
 
     driver.quit()
@@ -100,9 +102,56 @@ def enter_search_parameters(driver: WebDriver,
 def scrape_through_search_results(driver: WebDriver) -> Optional[Dict[str, str]]:
     """
     Loop through each week displayed, through each day of the week, to find possible available times.
-    If available appointment time is displayed, then return a dict with the available time and date.
+    If available appointment time is displayed in a div, then return a dict with the available time and date.
     Otherwise, return None.
     """
-    # TODO: implement scraping through the results
-    result_dict = {'available_time': "8:45", 'date': "26.02"}
-    return result_dict
+    for _ in DISPLAYED_WEEKS:
+        for day_index in INDEXES_FOR_DAYS_OF_THE_WEEK_DIV:
+            possible_available_time_div = driver.find_element_by_xpath(
+                get_xpath_for_possible_available_time_element(day_index)
+            )
+
+            # Primitive way of checking if available time is displayed in a div
+            if ':' in possible_available_time_div.text:
+                # There is an available time displayed in this div
+                available_time_str = possible_available_time_div.text
+                # Get the date of that available time, knowing that:
+                # the day_index of the available date will be the same as day_index of available time.
+                date_of_available_time = driver.find_element_by_xpath(
+                    get_xpath_for_date_of_available_time_element(day_index)
+                )
+                date_str = date_of_available_time.text
+
+                result_dict = {'available_time': available_time_str, 'date': date_str}
+                return result_dict
+
+        # Week finished, nothing found, click next.
+        next_week_button = driver.find_element_by_class_name(NEXT_WEEK_BUTTON_CLASS_NAME)
+        next_week_button.click()
+        time.sleep(3)  # wait until next page loads
+
+    return  # None; no available appointments found
+
+
+# xpath for divs showing the possible available times:
+def get_xpath_for_possible_available_time_element(day_index: int) -> str:
+    """
+    The element showing potential available times displayed in the results are found in divs having the xpath:
+
+    '/html/body/div[4]/div[2]/div/div[5]/div/div[3]/div/div[2]/div[N]/div[1]/a'
+                                                                   ^
+    where N is the day of the week from 2 to 8. So, div[2] is Mon, div[3] is Tue. and so on.
+    """
+    return f'/html/body/div[4]/div[2]/div/div[5]/div/div[3]/div/div[2]/div[{day_index}]/div[1]/a'
+
+
+# xpath for divs showing the date of available times:
+def get_xpath_for_date_of_available_time_element(day_index: int) -> str:
+    """
+    The element showing date of the available time is found in the div having the xpath:
+
+    '/html/body/div[4]/div[2]/div/div[5]/div/div[2]/div[3]/div[N]/span'
+                                                               ^
+    where N is the day of the week from 2 to 8.
+    """
+    return f'/html/body/div[4]/div[2]/div/div[5]/div/div[2]/div[3]/div[{day_index}]/span'

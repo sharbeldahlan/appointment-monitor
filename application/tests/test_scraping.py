@@ -3,6 +3,8 @@ from selenium import webdriver
 from application.constants import DRIVER_PATH
 from application.constants import WEBLINK
 from application.scraping import enter_search_parameters
+from application.scraping import get_xpath_for_date_of_available_time_element
+from application.scraping import get_xpath_for_possible_available_time_element
 from application.scraping import scrape_booking_site
 
 
@@ -38,3 +40,17 @@ def test_scrape_booking_site():
                                       service_choice_text="Citizenship application",
                                       office_choice_text="Helsinki")
     assert 'available_time' in result_dict.keys()
+
+
+def test_get_xpath_for_possible_available_time_element():
+    """ Basic test to check that the get xpath for the possible available time works as expected"""
+    expected_xpath = '/html/body/div[4]/div[2]/div/div[5]/div/div[3]/div/div[2]/div[3]/div[1]/a'
+    # This is what we are looking for --------------------------------------------> ^
+    assert get_xpath_for_possible_available_time_element(3) == expected_xpath
+
+
+def test_get_xpath_for_date_of_available_time_element():
+    """ Basic test to check that the get xpath for the date of the available time works as expected"""
+    expected_xpath = '/html/body/div[4]/div[2]/div/div[5]/div/div[2]/div[3]/div[5]/span'
+    # This is what we are looking for ----------------------------------------> ^
+    assert get_xpath_for_date_of_available_time_element(5) == expected_xpath
