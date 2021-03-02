@@ -1,3 +1,4 @@
+import pytest
 from selenium import webdriver
 
 from application.constants import DRIVER_PATH
@@ -8,26 +9,29 @@ from application.scraping import get_xpath_for_possible_available_time_element
 from application.scraping import scrape_booking_site
 
 
-def test_enter_search_parameters():
+@pytest.fixture()
+def driver_in_booking_site():
+    """ Fixture for the web driver in a state after entering the booking site """
+    driver = webdriver.Chrome(DRIVER_PATH)
+    # Go to appointment page
+    driver.implicitly_wait(3)
+    driver.get(WEBLINK)
+    yield driver
+    # Teardown: we need to quit the driver at the end of the test.
+    driver.quit()
+
+
+def test_enter_search_parameters(driver_in_booking_site):
     """
     Test that, after entering example search parameters and clicking search,
     the page shows the available weeks ("wk1", "wk2", "wk3", ...)
     """
-    # Create a WebDriver instance
-    driver = webdriver.Chrome(DRIVER_PATH)
-
-    # Go to appointment page
-    driver.implicitly_wait(3)
-    driver.get(WEBLINK)
-
-    # Enter some search parameters such as "Citizenship application" and "Helsinki"
     driver = enter_search_parameters(
-        driver=driver,
+        driver=driver_in_booking_site,
         category_choice_text="Citizenship",
         service_choice_text="Citizenship application",
         office_choice_text="Helsinki"
     )
-
     # Assert that we get "wk" in the resulting page source.
     assert "wk" in driver.page_source
 
