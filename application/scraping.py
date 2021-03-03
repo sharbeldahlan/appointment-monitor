@@ -61,16 +61,14 @@ def enter_search_parameters(driver: WebDriver, service_choice: str, office_choic
     # Change the language to English
     language_field = driver.find_element_by_xpath(LANGUAGE_FIELD_XPATH)
     language_field.click()
-    time.sleep(1)
     english_language_element = driver.find_element_by_partial_link_text(ENGLISH_LANGUAGE_CHOICE_TEXT)
     english_language_element.click()
+    time.sleep(1)
 
     # Enter the appointment parameters.
     # First, select category
-    time.sleep(1)
     category_field = driver.find_element_by_xpath(CATEGORY_FIELD_XPATH)
     category_field.click()
-    time.sleep(1)
     category_option = driver.find_element_by_partial_link_text(category_choice_text)
     category_option.click()
     time.sleep(1)
@@ -78,7 +76,6 @@ def enter_search_parameters(driver: WebDriver, service_choice: str, office_choic
     # Second, select service
     service_field = driver.find_element_by_xpath(SERVICE_FIELD_XPATH)
     service_field.click()
-    time.sleep(1)
     service_option = driver.find_element_by_partial_link_text(service_choice_text)
     service_option.click()
     time.sleep(1)
@@ -86,7 +83,6 @@ def enter_search_parameters(driver: WebDriver, service_choice: str, office_choic
     # Third, choose the office location of the service
     office_field = driver.find_element_by_xpath(OFFICE_FIELD_XPATH)
     office_field.click()
-    time.sleep(1)
     office_option = driver.find_element_by_partial_link_text(office_choice)
     office_option.click()
     time.sleep(1)
@@ -94,7 +90,7 @@ def enter_search_parameters(driver: WebDriver, service_choice: str, office_choic
     # Search availability
     search = driver.find_element_by_xpath(SEARCH_BUTTON_XPATH)
     search.click()
-    time.sleep(3)  # Initial wait until everything loads
+    time.sleep(5)  # Initial wait until everything loads
 
     return driver
 
@@ -128,7 +124,7 @@ def scrape_through_search_results(driver: WebDriver) -> Optional[Dict[str, str]]
         # Week finished, nothing found, click next.
         next_week_button = driver.find_element_by_class_name(NEXT_WEEK_BUTTON_CLASS_NAME)
         next_week_button.click()
-        time.sleep(3)  # wait until next page loads
+        time.sleep(1)  # wait until next page loads
 
     return  # None; no available appointments found
 
