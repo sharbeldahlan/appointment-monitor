@@ -19,7 +19,7 @@ Once a `MonitoringRequest` object is instantiated, the main task of `services.py
 the monitoring_request instances and monitor appointments based on their attributes.
 
 ## Main service of the monitoring
-The `main()` function in `services.py` will use the logic in `scraping.py` and `notification.py` to do the scraping 
+The `monitoring_service()` function in `services.py` will use the logic in `scraping.py` and `notification.py` to do the scraping 
 and notification. For each `MonitoringRequest` object in the database, it will do the following:
 1. Call `scrape_booking_site()` with the object's attributes.
 1. If the first call returns result, call `send_email()` with the details of the result.
