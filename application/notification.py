@@ -3,6 +3,7 @@ from typing import Dict
 
 from application.constants import FROM_EMAIL
 from application.constants import FROM_PASSWORD
+from application.constants import BOOKING_SITE_URL
 
 
 def send_email(available_appointment: Dict[str, str], to_email: str) -> None:
@@ -18,10 +19,16 @@ def send_email(available_appointment: Dict[str, str], to_email: str) -> None:
     email_server = setup_smtp_server()
 
     # Create email
-    # TODO message = ...
+    subject = "Appointment Spotted!"
+    body = f"Jee!\n\n" \
+           f"I spotted an appointment available on {date} at {available_time}.\n\n" \
+           f"Book it now on {BOOKING_SITE_URL}.\n\n" \
+           f"Cheers,\n" \
+           f"Moni Tore"
+    message = f"Subject: {subject}\n\n{body}"
 
     # Send email and quit server
-    # email_server.sendmail(FROM_EMAIL, to_email, message)
+    email_server.sendmail(FROM_EMAIL, to_email, message)
     email_server.quit()
 
 
