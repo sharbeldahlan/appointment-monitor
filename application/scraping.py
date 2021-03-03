@@ -5,6 +5,7 @@ from typing import Optional
 from selenium import webdriver
 from selenium.webdriver.remote.webdriver import WebDriver
 
+from application.constants import BOOKING_SITE_URL
 from application.constants import CATEGORY_FIELD_XPATH
 from application.constants import CATEGORY_TEXT_MAPPING
 from application.constants import DISPLAYED_WEEKS
@@ -17,7 +18,6 @@ from application.constants import OFFICE_FIELD_XPATH
 from application.constants import SEARCH_BUTTON_XPATH
 from application.constants import SERVICE_FIELD_XPATH
 from application.constants import SERVICE_TEXT_MAPPING
-from application.constants import WEBLINK
 
 
 def scrape_booking_site(service_choice: str, office_choice: str) -> Optional[Dict[str, str]]:
@@ -33,7 +33,7 @@ def scrape_booking_site(service_choice: str, office_choice: str) -> Optional[Dic
 
     # Go to appointment page
     driver.implicitly_wait(3)
-    driver.get(WEBLINK)
+    driver.get(BOOKING_SITE_URL)
 
     driver = enter_search_parameters(
         driver=driver,

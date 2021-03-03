@@ -10,8 +10,8 @@ load_dotenv()
 # ----------------------
 # path of the chrome web driver to be used by selenium
 DRIVER_PATH = os.getenv('DRIVER_PATH')
-# url to the appointment booking page
-WEBLINK = os.getenv('WEBLINK')
+# url to the appointment booking website
+BOOKING_SITE_URL = os.getenv('BOOKING_SITE_URL')
 
 # Constants passed to find_element_by_* methods in scraper.py
 LANGUAGE_FIELD_XPATH = '/html/body/div[2]/div[2]/div/div/div[2]/div[1]/ul[1]/li/a/span'

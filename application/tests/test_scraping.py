@@ -1,8 +1,8 @@
 import pytest
 from selenium import webdriver
 
+from application.constants import BOOKING_SITE_URL
 from application.constants import DRIVER_PATH
-from application.constants import WEBLINK
 from application.scraping import enter_search_parameters
 from application.scraping import get_xpath_for_date_of_available_time_element
 from application.scraping import get_xpath_for_possible_available_time_element
@@ -15,7 +15,7 @@ def driver_in_booking_site():
     driver = webdriver.Chrome(DRIVER_PATH)
     # Go to appointment page
     driver.implicitly_wait(3)
-    driver.get(WEBLINK)
+    driver.get(BOOKING_SITE_URL)
     yield driver
     # Teardown: we need to quit the driver at the end of the test.
     driver.quit()
