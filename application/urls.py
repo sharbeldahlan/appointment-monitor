@@ -1,7 +1,7 @@
 from django.urls import path
 
-from application.views import MonitoringRequestView
+from application.views import MonitoringRequestCreate
 
 urlpatterns = [
-    path('', MonitoringRequestView.as_view, name='monitoring_request_view'),
+    path('', MonitoringRequestCreate.as_view(), name='monitoring_request_view'),
 ]
