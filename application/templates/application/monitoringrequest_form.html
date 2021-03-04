@@ -48,6 +48,11 @@
             {{ form.as_p }}
             <input class="button" type="submit" value="Email me when an appointment is available 🚀">
         </form>
-
+        {% if messages %}
+            <br>
+            {% for message in messages %}
+                <p class="messages" style="color:MediumSeaGreen;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
     </body>
 </html>
