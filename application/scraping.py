@@ -40,7 +40,7 @@ def scrape_booking_site(service_choice: str, office_choice: str) -> Optional[Dic
         service_choice=service_choice,
         office_choice=office_choice
     )
-    result_dict = scrape_through_search_results(driver)
+    result_dict = scrape_through_search_results(driver=driver)
 
     driver.quit()
 
@@ -83,7 +83,7 @@ def enter_search_parameters(driver: WebDriver, service_choice: str, office_choic
     # Third, choose the office location of the service
     office_field = driver.find_element_by_xpath(OFFICE_FIELD_XPATH)
     office_field.click()
-    office_option = driver.find_element_by_partial_link_text(office_choice)
+    office_option = driver.find_element_by_partial_link_text(str(office_choice))
     office_option.click()
     time.sleep(1)
 

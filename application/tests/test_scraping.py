@@ -21,18 +21,29 @@ def driver_in_booking_site():
     driver.quit()
 
 
-def test_enter_search_parameters(driver_in_booking_site):
+@pytest.mark.parametrize(
+    "service_choice, service_choice_text, office_choice",
+    [
+        ('rp_permanent', 'Permanent', 'Helsinki : Käenkuja'),
+        ('citizenship_application', 'Citizenship application', 'Kuopio'),
+    ]
+)
+def test_enter_search_parameters(service_choice, service_choice_text, office_choice, driver_in_booking_site):
     """
     Test that, after entering example search parameters and clicking search,
-    the page shows the available weeks ("wk1", "wk2", "wk3", ...)
+    the page shows:
+     - the available weeks ("wk1", "wk2", "wk3", ...)
+     - the search parameters that were entered
     """
     driver = enter_search_parameters(
         driver=driver_in_booking_site,
-        service_choice='citizenship_application',
-        office_choice='Helsinki'
+        service_choice=service_choice,
+        office_choice=office_choice
     )
     # Assert that we get "wk" in the resulting page source.
     assert "wk" in driver.page_source
+    assert office_choice in driver.page_source
+    assert service_choice_text in driver.page_source
 
 
 @pytest.mark.parametrize(
