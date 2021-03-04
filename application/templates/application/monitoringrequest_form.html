@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> ⚙️ Migri Appointment Monitor</title>
+
+    </head>
+    <body>
+        <h1>Migri Appointment Monitor  ⚡️</h1>
+
+        <p>Choose the migri service and office for your appointment:</p>
+
+        <form action="{% url 'monitoring_request_view' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="button" type="submit" value="Email me when an appointment is available 🚀">
+        </form>
+
+    </body>
+</html>
