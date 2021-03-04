@@ -1,9 +1,9 @@
 import smtplib
 from typing import Dict
 
+from application.constants import BOOKING_SITE_URL
 from application.constants import FROM_EMAIL
 from application.constants import FROM_PASSWORD
-from application.constants import BOOKING_SITE_URL
 
 
 def send_email(available_appointment: Dict[str, str], to_email: str) -> None:
