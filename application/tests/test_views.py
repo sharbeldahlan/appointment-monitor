@@ -29,8 +29,13 @@ def test_monitoring_request_view__get__returns_200():
     assert response.status_code == 200
 
 
-def test_monitoring_request_view__post__valid_data__response_as_expected(valid_data_post_response):
+def test_monitoring_request_view__post__valid_data(valid_data_post_response):
+    url = reverse('monitoring_request_view')
+    expected_form_tag = f'<form action="{url}" method="post">'
+    expected_service_choice_field_label = 'Service choice'
     assert valid_data_post_response.status_code == 200
+    assert expected_form_tag in valid_data_post_response.rendered_content
+    assert expected_service_choice_field_label in valid_data_post_response.rendered_content
 
 # TODO: Test posting to the view with invalid data
 
