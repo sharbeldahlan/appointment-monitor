@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title> ⚙️ Migri Appointment Monitor</title>
+        <title>⚙️ Migri Appointment Monitor</title>
         <style type="text/css">
             body {
                 margin: 40px auto;
@@ -13,11 +13,9 @@
                 color: #444;
                 background: #f2f2f2;
             }
-
             h1 {
                 line-height: 1.2;
             }
-
             .button {
                 width: 75%;
                 max-width: 100%;
@@ -36,10 +34,13 @@
                 border-color: #333331 !important;
                 transition: all 0.4s ease 0s;
             }
+            .success-messages {
+                color:MediumSeaGreen;
+            }
         </style>
     </head>
     <body>
-        <h1>Migri Appointment Monitor  ⚡️</h1>
+        <h1>Migri Appointment Monitor ⚡️</h1>
 
         <p>Choose the migri service and office for your appointment:</p>
 
@@ -48,10 +49,11 @@
             {{ form.as_p }}
             <input class="button" type="submit" value="Email me when an appointment is available 🚀">
         </form>
+
         {% if messages %}
             <br>
             {% for message in messages %}
-                <p class="messages" style="color:MediumSeaGreen;">{{ message }}</p>
+                <p class="success-messages">{{ message }}</p>
             {% endfor %}
         {% endif %}
     </body>
