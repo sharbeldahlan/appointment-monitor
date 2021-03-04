@@ -125,8 +125,8 @@ TURKU = 'turku'
 VAASA = 'vaasa'
 
 OFFICE_CHOICES = (
-    (HELSINKI_KAENKUJA, 'Helsinki : K'),
-    (HELSINKI_MALMI, 'Helsinki : M'),
+    (HELSINKI_KAENKUJA, 'Helsinki : Käenkuja'),
+    (HELSINKI_MALMI, 'Helsinki : Malmi'),
     (KUOPIO, 'Kuopio'),
     (LAHTI, 'Lahti'),
     (LAPPEENRANTA, 'Lappeenranta'),
