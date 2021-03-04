@@ -20,6 +20,21 @@ def valid_data_post_response():
     yield response
 
 
+@pytest.fixture()
+def invalid_data_post_response():
+    """ Fixture for response of monitoring_request_view when posted with invalid data """
+    factory = RequestFactory()
+    url = reverse('monitoring_request_view')
+    data = {
+        'service_choice': 'citizenship_application',
+        'office_choice': 'Helsinki Käenkuja',
+        'to_email': 'test@example'  # INVALID_EMAIL
+    }
+    request = factory.post(path=url, data=data)
+    response = MonitoringRequestCreate.as_view()(request)
+    yield response
+
+
 def test_monitoring_request_view__get__returns_200():
     """ Test the response of a GET request to the MonitoringRequestCreate view """
     factory = RequestFactory()
@@ -37,5 +52,7 @@ def test_monitoring_request_view__post__valid_data(valid_data_post_response):
     assert expected_form_tag in valid_data_post_response.rendered_content
     assert expected_service_choice_field_label in valid_data_post_response.rendered_content
 
-# TODO: Test posting to the view with invalid data
 
+def test_monitoring_request_view__post__invalid_data(invalid_data_post_response):
+    expected_error_message = "Enter a valid email address."
+    assert expected_error_message in invalid_data_post_response.rendered_content
