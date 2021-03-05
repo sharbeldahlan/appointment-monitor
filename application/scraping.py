@@ -63,7 +63,7 @@ def enter_search_parameters(driver: WebDriver, service_choice: str, office_choic
     language_field.click()
     english_language_element = driver.find_element_by_partial_link_text(ENGLISH_LANGUAGE_CHOICE_TEXT)
     english_language_element.click()
-    time.sleep(1)
+    time.sleep(2)
 
     # Enter the appointment parameters.
     # First, select category
@@ -71,21 +71,21 @@ def enter_search_parameters(driver: WebDriver, service_choice: str, office_choic
     category_field.click()
     category_option = driver.find_element_by_partial_link_text(category_choice_text)
     category_option.click()
-    time.sleep(1)
+    time.sleep(2)
 
     # Second, select service
     service_field = driver.find_element_by_xpath(SERVICE_FIELD_XPATH)
     service_field.click()
     service_option = driver.find_element_by_partial_link_text(service_choice_text)
     service_option.click()
-    time.sleep(1)
+    time.sleep(2)
 
     # Third, choose the office location of the service
     office_field = driver.find_element_by_xpath(OFFICE_FIELD_XPATH)
     office_field.click()
     office_option = driver.find_element_by_partial_link_text(str(office_choice))
     office_option.click()
-    time.sleep(1)
+    time.sleep(2)
 
     # Search availability
     search = driver.find_element_by_xpath(SEARCH_BUTTON_XPATH)
@@ -124,7 +124,7 @@ def scrape_through_search_results(driver: WebDriver) -> Optional[Dict[str, str]]
         # Week finished, nothing found, click next.
         next_week_button = driver.find_element_by_class_name(NEXT_WEEK_BUTTON_CLASS_NAME)
         next_week_button.click()
-        time.sleep(1)  # wait until next page loads
+        time.sleep(2)  # wait until next page loads
 
     return  # None; no available appointments found
 

@@ -76,7 +76,7 @@ def test_enter_search_parameters(service_choice, service_choice_text, office_cho
 @pytest.mark.parametrize(
     "service_choice, office_choice",
     [
-        ('rp_permanent', 'Helsinki : K'),
+        ('rp_permanent', 'Helsinki : Malmi'),
         ('citizenship_application', 'Kuopio'),
     ]
 )
