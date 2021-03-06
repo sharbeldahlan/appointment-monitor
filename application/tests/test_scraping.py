@@ -73,27 +73,6 @@ def test_enter_search_parameters(service_choice, service_choice_text, office_cho
     assert service_choice_text in driver.page_source
 
 
-@pytest.mark.parametrize(
-    "service_choice, office_choice",
-    [
-        ('rp_permanent', 'Helsinki : Malmi'),
-        ('citizenship_application', 'Kuopio'),
-    ]
-)
-def test_scrape_booking_site(service_choice, office_choice):
-    """
-    Parametrized test for running the main scraping method using different service
-    and office choices. Since the booking webpage content (driver.page_source)
-    is hard to simulate, the test is written in a funky fashion to use conditionals
-    for the two different possible outcomes of scrape_booking_site() function.
-    """
-    result_dict = scrape_booking_site(service_choice, office_choice)
-    if result_dict:
-        assert 'available_time' in result_dict.keys()
-    else:
-        assert result_dict is None
-
-
 def test_get_xpath_for_possible_available_time_element():
     """ Basic test to check that the get xpath for the possible available time works as expected """
     expected_xpath = '/html/body/div[4]/div[2]/div/div[5]/div/div[3]/div/div[2]/div[3]/div[1]/a'
