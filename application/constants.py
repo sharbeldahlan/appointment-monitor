@@ -152,4 +152,3 @@ INDEXES_FOR_DAYS_OF_THE_WEEK_DIV = range(2, 8)
 # --------------------------
 FROM_EMAIL = os.getenv("FROM_EMAIL")  # Sender address (Gmail address)
 FROM_PASSWORD = os.getenv("FROM_PASSWORD")  # Sender server password (Gmail password)
-RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")  # Recipient address
