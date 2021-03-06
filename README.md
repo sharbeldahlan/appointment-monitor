@@ -1,6 +1,15 @@
 # appointment-monitor
 App to monitor the nearest available appointment at migri and email the user with the available appointment details.
 
+## Contents
+* [How to run](#how-to-run)
+* [How to run tests and other dev tools](#how-to-run-tests-and-other-dev-tools)
+* [Problem - Why do I need this?](#problem---why-do-i-need-this)
+* [Solution](#solution)
+* [App's basic flow](#apps-basic-flow)
+* [Development methodologies](#development-methodologies)
+* [Some thoughts](#some-thoughts)
+
 ## How to run
 ### Setting up
 1. Install the [Chrome Driver](https://sites.google.com/a/chromium.org/chromedriver/downloads) which the project uses.
