@@ -1,6 +1,14 @@
 # appointment-monitor
 App to monitor the nearest available appointment at migri and email the user with the available appointment details.
 
+You create monitoring requests:
+
+![](input_demo.gif)
+
+Every 10 minutes, the app will scrape the migri booking page in the background:
+
+![](demo.gif)
+
 ## Contents
 * [How to run](#how-to-run)
 * [How to run tests and other dev tools](#how-to-run-tests-and-other-dev-tools)
