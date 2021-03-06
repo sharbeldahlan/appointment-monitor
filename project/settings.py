@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'application',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Periodic tasks
+CRONJOBS = [
+    # Run application.services.monitoring_service() every 10 minutes
+    ('*/10 * * * *', 'application.services.monitoring_service'),
+]
