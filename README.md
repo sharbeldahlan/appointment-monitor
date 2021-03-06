@@ -3,17 +3,17 @@ App to monitor the nearest available appointment at migri and email the user wit
 
 ## Problem - Why do I need this?
 There was a time in my life in which I needed to keep on checking the appointment booking system in order to find a 
-time slot for both my residence permit application and my citizenship application.
-Both of these applications required different appointment types that I had to search for.
-It got time consuming (and mentally taxing) when the appointments were very scarce, and the calendar was showing
-appointments either in the far future or far-away cities. 
+time slot for each of my residence permit and my citizenship applications.
+Both required different appointment types that I had to search for.
+It got time-consuming (and mentally taxing) when the appointments were scarce, and the calendar was showing
+no appointments, except for in far-away cities.
 
 ## Solution
 Build a bot to do the checking for me.
 The bot uses:
 - Selenium: to do the scraping and checking for available appointments.
-- Django: to save the monitoring requests containing the search parameters and email of the recipient.
-- Celery: to run the task of checking the available appointments periodically.
+- Django: to run server that takes monitoring requests containing the search parameters and email of the recipient.
+- Cron: to run the task of checking the available appointments periodically.
 
 ## App's basic flow
 `MonitoringRequest` objects instantiated and stored in DB.
@@ -22,7 +22,10 @@ Every 10 mins, do appointment monitoring (main task):
 - Search for available appointments based on the attributes of each monitor.
 - Email with the availability.
 
-## Development Methodologies
+For a more detailed technical walkthrough, click
+[here](https://github.com/sharbeldahlan/appointment-monitor/blob/master/application/README.md).
+
+## Development methodologies
 - Agile: Kanban. Check out the
   [project's kanban board](https://github.com/sharbeldahlan/appointment-monitor/projects/1).
 - Documentation-driven development (DDD, for the love of acronyms).
