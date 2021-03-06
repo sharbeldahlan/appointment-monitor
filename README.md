@@ -1,5 +1,6 @@
 # appointment-monitor
-App to monitor the nearest available appointment at migri and email the user with the available appointment details.
+App to monitor the nearest available appointment at migri every 10 minutes, and email the user with the available
+appointment details.
 
 You create monitoring requests:
 
