@@ -74,23 +74,60 @@ For a more detailed technical walkthrough, click
 - Documentation-driven development (DDD, for the love of acronyms).
 - Test-driven Development (TDD).
 
-## Advantages
-In addition to the main advantage of not having to manually do the search:
-  - The app can set multiple monitoring requests of different types,
-  such as residence permit and citizenship, and different emails to send to.
+## Some thoughts
 
-## Limitations
-- This app **does not** do the booking, and this is by design. Letting the bot do the actual booking is both
-  out of scope and adds [legal](#legal) complexity.
-- This is limited to the migri appointment page (vihta). Changes to rendered page might result in system not working.
-It would be better if there is an API to get all appointment data.
-The scraping depends on the structure of the output html on the appointment booking page.
-- The frequency of running the main task is limited. It is only every 10 minutes, so an appointment can be taken
-  before the next checking time approaches. However, making the time checking more frequent is also risky,
-  since multiple frequent requests might risk being blocked.
+<details>
+    <summary>Advantages</summary>
+    <ul>
+        <li>
+            In addition to the main advantage of not having to manually do the search: The app can set multiple monitoring
+            requests of different types, such as residence permit and citizenship, and different emails to send to.
+        </li>
+    </ul>
+</details>
 
-## Legal
-This is under MIT License. It is intended for personal use, mostly for fun (and ease of mind) purposes.
-When you use it, **do not book multiple appointments and try to sell them**, because that is [illegal](
-https://yle.fi/uutiset/osasto/news/migri_cracks_down_on_illegal_online_sales_of_residence_permit_appointments/11525539
-).
+<details>
+    <summary>Limitations</summary>
+    <ul>
+        <li>
+            This app does not do the booking, and this is by design. Letting the bot do the actual booking is both
+            out of scope and adds <a href="#legal">legal</a> complexity.
+        </li>
+        <li>
+            This is limited to the migri appointment page (vihta). Changes to rendered page might result in system not
+            working. It would be better if there is an API to get all appointment data.
+            The scraping depends on the structure of the output html on the appointment booking page.
+        </li>
+    </ul>
+</details>
+
+<details>
+    <summary>Future improvements </summary>
+    <ul>
+        <li> For the user experience:
+        <ul>
+            <li> 
+                Stop the notifications. Right now, you pull the plug 🔌: i.e. stop the server, 
+                Later: delete monitoring requests or unsubscribe.
+            </li>
+        </ul>
+        </li>
+        <li>Nice-to-haves:
+        <ul>
+            <li> Show the past monitors or current monitors in progress.</li>
+            <li> Show more than one available appointment at a time for options.</li>
+        </ul>
+        </li>
+    </ul>
+</details>
+
+<details id="legal">
+    <summary>Legal</summary>
+    <ul>
+        <li>
+            This is under MIT License. It is intended for personal use, mostly for fun (and ease of mind) purposes.
+            When you use it, do not book multiple appointments and try to sell them, because that is
+            <a href="https://bit.ly/38dSrzT" target="_blank">illegal<a>.
+        </li>
+    </ul>
+</details>
