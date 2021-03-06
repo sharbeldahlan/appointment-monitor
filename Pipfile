@@ -15,6 +15,7 @@ pytest-cov = "==2.11.1"
 django = "==3.1.7"
 python-dotenv = "==0.15.0"
 selenium = "==3.141.0"
+django-crontab = "==0.7.1"
 
 [requires]
 python_version = "3.7"
