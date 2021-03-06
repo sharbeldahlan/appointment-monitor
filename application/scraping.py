@@ -126,7 +126,7 @@ def scrape_through_search_results(driver: WebDriver) -> Optional[Dict[str, str]]
         next_week_button.click()
         time.sleep(2)  # wait until next page loads
 
-    return  # None; no available appointments found
+    return None  # No available appointments found
 
 
 # xpath for divs showing the possible available times:
